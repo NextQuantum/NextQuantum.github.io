@@ -1,0 +1,114 @@
+EasyPi License
+Version 1.0
+
+Copyright (c) 2026 Serghei (EasyPi Project).
+All rights reserved.
+
+IMPORTANT: PLEASE READ THIS LICENSE CAREFULLY BEFORE USING THIS SOFTWARE.
+
+This software ("EasyPi") is provided as a compiled binary and related runtime files.
+The source code is NOT provided and remains the exclusive intellectual property
+of the copyright holder.
+
+The software is protected by international copyright and intellectual
+property laws.
+
+--------------------------------------------------------------------
+1. GRANT OF LICENSE
+--------------------------------------------------------------------
+
+Permission is granted to install and use EasyPi free of charge
+ONLY for personal, non-commercial purposes.
+
+"Personal use" means usage in a private home or personal laboratory
+environment, not intended to generate revenue or provide services
+to third parties.
+
+--------------------------------------------------------------------
+2. RESTRICTIONS
+--------------------------------------------------------------------
+
+You may NOT:
+
+- Modify, reverse engineer, decompile, disassemble, or attempt to
+  extract the source code from the binary.
+- Redistribute, sublicense, sell, rent, lease, or otherwise transfer
+  the software to third parties.
+- Use the software in any commercial environment, including but not
+  limited to companies, hosting providers, ISPs, or managed services.
+- Offer EasyPi as a service (SaaS, PaaS, hosted solution, VPN/DNS service).
+- Publish, mirror, or repackage the software or any part of it.
+- Remove or alter copyright, license, or ownership notices.
+
+--------------------------------------------------------------------
+3. OWNERSHIP
+--------------------------------------------------------------------
+
+EasyPi is licensed, not sold.
+
+All rights, title, and interest in and to the software, including
+but not limited to binaries, architecture, logic, design, and
+documentation, remain the exclusive property of the copyright holder.
+
+--------------------------------------------------------------------
+4. NO WARRANTY
+--------------------------------------------------------------------
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+NON-INFRINGEMENT.
+
+THE ENTIRE RISK ARISING OUT OF THE USE OR PERFORMANCE OF THE
+SOFTWARE REMAINS WITH YOU.
+
+--------------------------------------------------------------------
+5. LIMITATION OF LIABILITY
+--------------------------------------------------------------------
+
+IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR
+ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+THIS INCLUDES, BUT IS NOT LIMITED TO:
+- NETWORK MISCONFIGURATION
+- LOSS OF INTERNET CONNECTIVITY
+- DATA LOSS
+- SECURITY INCIDENTS
+- SERVICE INTERRUPTIONS
+
+--------------------------------------------------------------------
+6. TERMINATION
+--------------------------------------------------------------------
+
+Any violation of this License automatically terminates your rights
+to use the software.
+
+Upon termination, you must immediately stop using the software
+and remove it from all systems under your control.
+
+--------------------------------------------------------------------
+7. FUTURE COMMERCIAL LICENSE
+--------------------------------------------------------------------
+
+The author reserves the right to offer separate commercial licenses,
+paid editions, or additional features in the future.
+
+Use of EasyPi under this License does not grant any rights to
+future versions or commercial offerings.
+
+--------------------------------------------------------------------
+8. ACCEPTANCE
+--------------------------------------------------------------------
+
+By installing, running, or using EasyPi, you acknowledge that you
+have read, understood, and agreed to the terms of this License.
+
+If you do not agree to these terms, you must not install or use
+this software.
+
+--------------------------------------------------------------------
+
+End of License

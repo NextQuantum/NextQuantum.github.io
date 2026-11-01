@@ -1,0 +1,133 @@
+END USER LICENSE AGREEMENT (EULA)
+EasyPi
+
+Last updated: 2026
+
+IMPORTANT: PLEASE READ THIS AGREEMENT CAREFULLY BEFORE USING THIS SOFTWARE.
+
+This End User License Agreement ("Agreement") is a legal agreement between
+you ("User") and the author of EasyPi ("Author").
+
+By installing, copying, running, or using EasyPi, you agree to be bound
+by the terms of this Agreement. If you do not agree to these terms,
+do not install or use the software.
+
+--------------------------------------------------------------------
+1. SOFTWARE DESCRIPTION
+--------------------------------------------------------------------
+
+EasyPi is a self-hosted network and security platform that may include,
+but is not limited to:
+- DNS filtering and network protection
+- Traffic blocking and routing features
+- VPN, firewall, monitoring, and gateway components
+- Automation, scripts, and system-level services
+
+The software operates at a low network level and may affect internet
+connectivity, routing, and access to network resources.
+
+--------------------------------------------------------------------
+2. LICENSE GRANT
+--------------------------------------------------------------------
+
+The software is licensed, not sold.
+
+Your rights to use EasyPi are governed by the accompanying LICENSE file.
+This Agreement supplements, but does not replace, the LICENSE.
+
+--------------------------------------------------------------------
+3. USER RESPONSIBILITY
+--------------------------------------------------------------------
+
+You acknowledge and agree that:
+
+- You are solely responsible for the configuration, deployment, and use
+  of the software.
+- You understand that incorrect configuration may result in loss of
+  network connectivity, service interruption, or blocked access to
+  websites and services.
+- You are responsible for compliance with local laws and regulations,
+  including but not limited to network usage, privacy, and data protection laws.
+
+--------------------------------------------------------------------
+4. NO WARRANTY
+--------------------------------------------------------------------
+
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY
+OF ANY KIND, EXPRESS OR IMPLIED.
+
+THE AUTHOR MAKES NO WARRANTIES, INCLUDING BUT NOT LIMITED TO:
+- FITNESS FOR A PARTICULAR PURPOSE
+- MERCHANTABILITY
+- SYSTEM AVAILABILITY
+- SECURITY OR ERROR-FREE OPERATION
+
+YOU USE THE SOFTWARE ENTIRELY AT YOUR OWN RISK.
+
+--------------------------------------------------------------------
+5. LIMITATION OF LIABILITY
+--------------------------------------------------------------------
+
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES, INCLUDING BUT
+NOT LIMITED TO:
+
+- LOSS OF INTERNET ACCESS
+- NETWORK OUTAGES OR MISCONFIGURATION
+- DATA LOSS OR CORRUPTION
+- SECURITY BREACHES
+- MISUSE OR MISINTERPRETATION OF BLOCKED CONTENT
+- HARDWARE OR SOFTWARE DAMAGE
+
+EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+--------------------------------------------------------------------
+6. SECURITY AND NETWORK IMPACT
+--------------------------------------------------------------------
+
+You acknowledge that EasyPi may:
+- Intercept, block, redirect, or modify network traffic
+- Log DNS queries or network metadata
+- Affect third-party devices on your network
+
+You are solely responsible for informing users of your network
+about such behavior, where required by law.
+
+--------------------------------------------------------------------
+7. UPDATES AND CHANGES
+--------------------------------------------------------------------
+
+The Author may update, modify, or discontinue the software at any time,
+with or without notice.
+
+There is no obligation to provide updates, support, or maintenance.
+
+--------------------------------------------------------------------
+8. TERMINATION
+--------------------------------------------------------------------
+
+This Agreement is effective until terminated.
+
+Your rights under this Agreement will automatically terminate if you
+fail to comply with any of its terms.
+
+Upon termination, you must cease all use of the software.
+
+--------------------------------------------------------------------
+9. GOVERNING LAW
+--------------------------------------------------------------------
+
+This Agreement shall be governed by and construed in accordance with
+the laws of the European Union and applicable local laws.
+
+--------------------------------------------------------------------
+10. ENTIRE AGREEMENT
+--------------------------------------------------------------------
+
+This Agreement, together with the LICENSE file, constitutes the entire
+agreement between you and the Author regarding the software and
+supersedes all prior or contemporaneous understandings.
+
+--------------------------------------------------------------------
+
+END OF AGREEMENT

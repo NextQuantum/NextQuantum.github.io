@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="EasyPi is a self-hosted Raspberry Pi control plane for network security, Guard Security, PRISM traffic analysis, VPN, Chameleon Stealth, EasyPi Mobile, private storage, cameras, backups, and automation.">
+    <meta name="keywords"
+        content="EasyPi, EasyPi Mobile, Android, Raspberry Pi, Guard Security, PRISM, Chameleon, Stealth, parental control, DNS filtering, VPN, WireGuard, Tailscale, network security">
+    <meta name="author" content="NextQuantum">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="EasyPi - Raspberry Pi Security & Network Control">
+    <meta property="og:description" content="A self-hosted network control plane with Guard Security, PRISM, Chameleon Stealth, VPN, DNS, storage, cameras, and recovery tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/og-image.svg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+
+    <title>EasyPi - Raspberry Pi Security & Network Control Dashboard</title>
+</head>
+
+<body>
+    <!-- Cursor glow effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 15l-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <img src="assets/favicon.svg" class="logo-mark" alt="EasyPi Logo">
+                <span class="logo-text">EasyPi</span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#features" class="nav-link" data-i18n="nav-features">Features</a></li>
+                <li><a href="#security" class="nav-link" data-i18n="nav-security">Security</a></li>
+                <li><a href="#parental" class="nav-link" data-i18n="nav-parental">Parental</a></li>
+                <li><a href="#ai" class="nav-link" data-i18n="nav-ai">AI Assistant</a></li>
+                <li><a href="#network" class="nav-link" data-i18n="nav-network">Network</a></li>
+                <li><a href="#mobile" class="nav-link" data-i18n="nav-mobile">Mobile</a></li>
+                <li><a href="#architecture" class="nav-link">Architecture</a></li>
+                <li><a href="#gallery" class="nav-link" data-i18n="nav-gallery">Gallery</a></li>
+                <li><a href="#installation" class="nav-link" data-i18n="nav-install">Installation</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <select class="lang-switcher" id="langSwitcher" aria-label="Select Language">
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="ru">🇷🇺 RU</option>
+                    <option value="de">🇩🇪 DE</option>
+                </select>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42">
+                        </path>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <a href="https://github.com/NextQuantum/EasyPi" target="_blank" class="btn btn-outline">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                        <path
+                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                    </svg>
+                    GitHub
+                </a>
+                <a href="#installation" class="btn btn-primary" data-i18n="hero-cta-primary">Get Started</a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-grid"></div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-badge animate-fade-in">
+                    <span class="badge-dot"></span>
+                    <span>v1.1.0 · Raspberry Pi OS Trixie · ARM64</span>
+                </div>
+
+                <h1 class="hero-title animate-fade-in-up" data-i18n="hero-tagline">
+                    Your Raspberry Pi. Your network. One control plane.
+                </h1>
+
+                <p class="hero-description animate-fade-in-up delay-1" data-i18n="hero-description">
+                    Monitor the Pi, control the network path, protect every device, and keep your data at home.
+                    EasyPi brings security, routing, storage, cameras, recovery, and local AI into one clear interface.
+                </p>
+
+                <div class="hero-actions animate-fade-in-up delay-2">
+                    <a href="#installation" class="btn btn-primary btn-lg" data-i18n="hero-cta-primary">
+                        Install Now
+                    </a>
+                    <a href="#security" class="btn btn-glass btn-lg">
+                        View Security
+                    </a>
+                </div>
+
+                <div class="hero-stats animate-fade-in-up delay-3">
+                    <div class="stat">
+                        <span class="stat-value" data-count="15">0</span>+
+                        <span class="stat-label" data-i18n="stat-services-label">Services</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value" data-count="40">0</span>+
+                        <span class="stat-label" data-i18n="stat-apps-label">Blocked Apps</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-value" data-i18n="stat-license-label">Secure</span>
+                        <span class="stat-label">Proprietary</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual animate-fade-in-up delay-2">
+                <div class="dashboard-preview-image">
+                    <img src="assets/screenshots/dashboard/dashboard-1.png" alt="EasyPi Dashboard"
+                        class="main-screenshot">
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M19 12l-7 7-7-7" />
+                </svg>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge" data-i18n="all-features-badge">Features</span>
+                <h2 class="section-title" data-i18n="all-features-title">All EasyPi Functions</h2>
+                <p class="section-description" data-i18n="all-features-desc">
+                    Every main module is shown below with a real screenshot from the corresponding EasyPi section.
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon"><span>📊</span></div>
+                    <h3>Dashboard</h3>
+                    <p>System overview with CPU, RAM, temperature, disk and service status.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/dashboard/dashboard-1.png" alt="EasyPi Dashboard"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Live metrics and cards</li>
+                        <li>Gateway mode status</li>
+                        <li>Quick navigation tiles</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="40">
+                    <div class="feature-icon"><span>⚙️</span></div>
+                    <h3>Setup Wizard</h3>
+                    <p>Guided onboarding and first-time configuration flow.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/setup/setup_1.png" alt="EasyPi Setup" class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>First install steps</li>
+                        <li>Environment checks</li>
+                        <li>Safe initial setup</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="80">
+                    <div class="feature-icon"><span>🛡️</span></div>
+                    <h3>Guard Security</h3>
+                    <p>Main security center for DNS, heuristics, and network protection controls.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/guard-security/1.guard.png" alt="EasyPi Guard Security"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Threat protection controls</li>
+                        <li>Lists and policies</li>
+                        <li>Security analytics</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="120">
+                    <div class="feature-icon"><span>👨‍👩‍👧</span></div>
+                    <h3>Parental Controls</h3>
+                    <p>Profile-based restrictions, schedules, bypass detection, and restore workflow.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/guard-security/5.parents_control.png"
+                            alt="EasyPi Parental Controls" class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Per-device policy profiles</li>
+                        <li>Bypass leak actions</li>
+                        <li>Fail-closed restore</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="160">
+                    <div class="feature-icon"><span>🌐</span></div>
+                    <h3>DNS Filtering</h3>
+                    <p>DNS controls with query logging and block/allow policy management.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/dns/dns-1.png" alt="EasyPi DNS" class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>DNS policy modes</li>
+                        <li>Query insight</li>
+                        <li>DoH bypass hardening</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon"><span>🔐</span></div>
+                    <h3>VPN</h3>
+                    <p>VPN management for client and remote access scenarios.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/vpn/vpn.png" alt="EasyPi VPN" class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>WireGuard and access flows</li>
+                        <li>Status and controls</li>
+                        <li>Simple management UI</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="240">
+                    <div class="feature-icon"><span>🌍</span></div>
+                    <h3>Remote Access</h3>
+                    <p>Remote connectivity section for safe external management.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/remote-access/remote_1.png" alt="EasyPi Remote Access"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Connection settings</li>
+                        <li>Access status</li>
+                        <li>Remote workflow</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="260">
+                    <div class="feature-icon"><span>🔏</span></div>
+                    <h3>Internet Encryption</h3>
+                    <p>Route selected devices through encrypted internet providers from one control panel.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/internet-encryption/internet-encryption.png"
+                            alt="EasyPi Internet Encryption" class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Per-device encrypted routing</li>
+                        <li>Provider status and controls</li>
+                        <li>Fail-closed routing options</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="270">
+                    <div class="feature-icon"><span>🥷</span></div>
+                    <h3>Stealth</h3>
+                    <p>Adaptive anti-censorship transport designed to resemble ordinary HTTPS traffic.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/stealth/stealth.png" alt="EasyPi Stealth"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Chameleon tunnel controls</li>
+                        <li>Strict server identity</li>
+                        <li>Protected DNS and kill switch</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="280">
+                    <div class="feature-icon"><span>🧰</span></div>
+                    <h3>Network Toolkit</h3>
+                    <p>Practical networking tools for diagnostics and troubleshooting.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/network-toolkit/1.toolkit.png" alt="EasyPi Network Toolkit"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Port and LAN scanners</li>
+                        <li>Traffic and speed tests</li>
+                        <li>ARP and active connections</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="320">
+                    <div class="feature-icon"><span>📈</span></div>
+                    <h3>Network Activity</h3>
+                    <p>Traffic visibility and per-device network behavior monitoring.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/network-activity/1.network_activity.png"
+                            alt="EasyPi Network Activity" class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Live traffic data</li>
+                        <li>Usage overview</li>
+                        <li>Quick anomaly spotting</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="340">
+                    <div class="feature-icon"><span>☁️</span></div>
+                    <h3>Cloud</h3>
+                    <p>Private file storage with automatic categories, sharing, encryption, and remote uploads.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/cloud/cloud.png" alt="EasyPi Cloud" class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Photos, videos, and documents</li>
+                        <li>Telegram and Taildrop uploads</li>
+                        <li>Encrypted files and sharing</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="360">
+                    <div class="feature-icon"><span>📡</span></div>
+                    <h3>Monitoring</h3>
+                    <p>System health and operational monitoring from one screen.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/monitoring/monitoring.png" alt="EasyPi Monitoring"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Service health view</li>
+                        <li>Status checks</li>
+                        <li>Operational visibility</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon"><span>🤖</span></div>
+                    <h3>Local Ollama Chat</h3>
+                    <p>Private, server-local AI chat for EasyPi questions, administration, and service guidance.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/ai-chat/1.ai_chat.png" alt="EasyPi AI Chat"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Runs locally with Ollama</li>
+                        <li>EasyPi-aware answers</li>
+                        <li>Conversation history</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="440">
+                    <div class="feature-icon"><span>🧠</span></div>
+                    <h3>Dashboard Assistant</h3>
+                    <p>Context-aware help available from every EasyPi section without leaving the current page.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/claude/claude_telegram_bot.png" alt="EasyPi Dashboard Assistant"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Section-specific suggestions</li>
+                        <li>Local product knowledge</li>
+                        <li>Quick operational guidance</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="480">
+                    <div class="feature-icon"><span>📁</span></div>
+                    <h3>File Manager</h3>
+                    <p>Web-based file browsing, editing, and transfer operations.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/file-manager/file_manager.png" alt="EasyPi File Manager"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>File operations</li>
+                        <li>In-browser editing</li>
+                        <li>Fast access to paths</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="520">
+                    <div class="feature-icon"><span>💻</span></div>
+                    <h3>Web Terminal</h3>
+                    <p>Browser terminal for direct command execution and maintenance tasks.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/terminal/terminal.png" alt="EasyPi Terminal"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Terminal in browser</li>
+                        <li>Admin operations</li>
+                        <li>No extra SSH tool needed</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="560">
+                    <div class="feature-icon"><span>📹</span></div>
+                    <h3>IP Cameras</h3>
+                    <p>Camera section for viewing, organizing, and managing streams.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/ip-cameras/1.cameras.png" alt="EasyPi IP Cameras"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Camera integration</li>
+                        <li>Live stream access</li>
+                        <li>Simple camera management</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon"><span>💾</span></div>
+                    <h3>System Backup</h3>
+                    <p>Backup and restore module to protect configuration and service state.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/system-backup/sistem_backup.png" alt="EasyPi Backup"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Backup management</li>
+                        <li>Restore workflows</li>
+                        <li>Operational safety</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="610">
+                    <div class="feature-icon"><span>📋</span></div>
+                    <h3>Jobs</h3>
+                    <p>Central history for background operations, deployments, and administrative actions.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/jobs/jobs.png" alt="EasyPi Jobs" class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Operation status and progress</li>
+                        <li>Detailed results and errors</li>
+                        <li>Auditable admin actions</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="620">
+                    <div class="feature-icon"><span>🔔</span></div>
+                    <h3>Notifications</h3>
+                    <p>A unified inbox for security events, service alerts, and completed operations.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/notifications/notifications.png" alt="EasyPi Notifications"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Security and system alerts</li>
+                        <li>Read and severity filters</li>
+                        <li>Browser push support</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="630">
+                    <div class="feature-icon"><span>↩️</span></div>
+                    <h3>Rollback</h3>
+                    <p>Create safe system snapshots and restore a known-good configuration when needed.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/rollback/rollback.png" alt="EasyPi Rollback"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Manual safe snapshots</li>
+                        <li>Protected restore workflow</li>
+                        <li>Snapshot download and cleanup</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="640">
+                    <div class="feature-icon"><span>👥</span></div>
+                    <h3>Users</h3>
+                    <p>User and role area for account controls and access visibility.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/users/users.png" alt="EasyPi Users" class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>User management</li>
+                        <li>Access overview</li>
+                        <li>Session-aware workflows</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="680">
+                    <div class="feature-icon"><span>🧩</span></div>
+                    <h3>Settings</h3>
+                    <p>Central settings for preferences, behavior, and platform options.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/settings/1.settings.png" alt="EasyPi Settings"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>System preferences</li>
+                        <li>UI and account settings</li>
+                        <li>Operational toggles</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="720">
+                    <div class="feature-icon"><span>🧭</span></div>
+                    <h3>Help & Support</h3>
+                    <p>Built-in help pages and user guidance for each module.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/help-support/1.help_support.png" alt="EasyPi Help and Support"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Feature explanations</li>
+                        <li>Troubleshooting hints</li>
+                        <li>Fast user guidance</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="760">
+                    <div class="feature-icon"><span>🔒</span></div>
+                    <h3>Security Overview</h3>
+                    <p>Dedicated security dashboard for risk visibility and action points.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/security/security.png" alt="EasyPi Security"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Protection overview</li>
+                        <li>Security status</li>
+                        <li>Fast response access</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="770">
+                    <div class="feature-icon"><span>📱</span></div>
+                    <h3 data-i18n="mobile-card-title">EasyPi Mobile</h3>
+                    <p data-i18n="mobile-card-desc">Android companion for private protection, Chameleon VPN, photos, file sharing, and home cameras.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/easyPi-mobile/1.png" alt="EasyPi Mobile management and pairing"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li data-i18n="mobile-card-l1">One-time QR pairing</li>
+                        <li data-i18n="mobile-card-l2">Independent PRISM and Chameleon controls</li>
+                        <li data-i18n="mobile-card-l3">Private photos, sharing, and camera access</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="780">
+                    <div class="feature-icon"><span>🛍️</span></div>
+                    <h3>Marketplace</h3>
+                    <p>A read-only preview of planned EasyPi packages and future service integrations.</p>
+                    <div class="feature-preview">
+                        <img src="assets/screenshots/marketplace/marketplace.png" alt="EasyPi Marketplace"
+                            class="mini-screenshot">
+                    </div>
+                    <ul class="feature-list">
+                        <li>Planned package catalog</li>
+                        <li>Security-first package design</li>
+                        <li>Installation remains disabled</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- EasyPi Mobile Section -->
+    <section class="mobile-section" id="mobile">
+        <div class="container">
+            <div class="mobile-content">
+                <div class="mobile-copy">
+                    <span class="section-badge" data-i18n="mobile-badge">Android companion</span>
+                    <h2 class="section-title" data-i18n="mobile-title">EasyPi protection and private services on your phone</h2>
+                    <p class="section-description" data-i18n="mobile-desc">
+                        EasyPi Mobile links an Android 11+ phone to your home EasyPi with a one-time QR code. A restricted
+                        Mobile API token and pinned HTTPS connection keep remote management separate from full-device VPN traffic.
+                    </p>
+
+                    <div class="mobile-capabilities">
+                        <div class="mobile-capability">
+                            <div class="mobile-capability-icon">🛡️</div>
+                            <div>
+                                <h4 data-i18n="mobile-prism-title">PRISM Protection</h4>
+                                <p data-i18n="mobile-prism-desc">Applies authenticated EasyPi domain policy locally to DNS and TLS SNI traffic.</p>
+                            </div>
+                        </div>
+                        <div class="mobile-capability">
+                            <div class="mobile-capability-icon">🥷</div>
+                            <div>
+                                <h4 data-i18n="mobile-vpn-title">Chameleon VPN</h4>
+                                <p data-i18n="mobile-vpn-desc">Routes all traffic or selected apps through Chameleon, independently from PRISM.</p>
+                            </div>
+                        </div>
+                        <div class="mobile-capability">
+                            <div class="mobile-capability-icon">🖼️</div>
+                            <div>
+                                <h4 data-i18n="mobile-cloud-title">Photos and sharing</h4>
+                                <p data-i18n="mobile-cloud-desc">Syncs a chosen photo folder and accepts Android Share actions for private uploads to EasyPi.</p>
+                            </div>
+                        </div>
+                        <div class="mobile-capability">
+                            <div class="mobile-capability-icon">📹</div>
+                            <div>
+                                <h4 data-i18n="mobile-camera-title">Dashboard and cameras</h4>
+                                <p data-i18n="mobile-camera-desc">Shows this phone's DNS protection statistics and snapshots from cameras connected to EasyPi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mobile-security-note">
+                        <span aria-hidden="true">🔐</span>
+                        <p data-i18n="mobile-security-note">Tokens and the Chameleon profile are encrypted with Android Keystore. The app uses no Accessibility service, does not inspect the screen, disables cleartext traffic, and keeps Mobile Link available while the VPN reconnects.</p>
+                    </div>
+                </div>
+
+                <div class="mobile-visual">
+                    <a href="assets/screenshots/easyPi-mobile/1.png" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/screenshots/easyPi-mobile/1.png"
+                            alt="EasyPi Mobile Assistant with secure pairing and Mobile Link status"
+                            class="mobile-screenshot">
+                    </a>
+                    <div class="mobile-version" data-i18n="mobile-platform">Android 11+ · one VpnService · no cleartext traffic</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Architecture & Deep Dive -->
+    <section class="architecture-section" id="architecture">
+        <div class="container">
+            <div class="section-header architecture-heading">
+                <span class="section-badge">Architecture</span>
+                <h2 class="section-title">How EasyPi is connected</h2>
+                <p class="section-description">The browser and EasyPi Mobile talk to one protected control plane. Only
+                    reviewed tasks cross the privileged boundary, while networking and VPS services stay in clearly
+                    separated paths.</p>
+            </div>
+
+            <div class="architecture-map" role="img" aria-label="EasyPi architecture: the React PWA and EasyPi Mobile connect through protected HTTPS interfaces and nginx to FastAPI, which uses a database, privileged system tasks, local network protection, VPN services, Personal DNS, and Chameleon VPS.">
+                <svg viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="archBox" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#202a3a"/>
+                            <stop offset="1" stop-color="#171e2b"/>
+                        </linearGradient>
+                        <marker id="archArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#2aa8e8"/>
+                        </marker>
+                    </defs>
+                    <g class="arch-lines" fill="none" stroke="#2aa8e8" stroke-width="2" marker-end="url(#archArrow)">
+                        <path d="M380 92 C380 120 470 120 520 148"/>
+                        <path d="M820 92 C820 120 730 120 680 148"/>
+                        <path d="M600 220 V278"/>
+                        <path d="M430 388 C300 420 220 432 220 482"/>
+                        <path d="M600 388 V482"/>
+                        <path d="M770 388 C900 420 980 432 980 482"/>
+                        <path d="M600 562 V625"/>
+                        <path d="M980 562 V625"/>
+                    </g>
+                    <g class="arch-boxes" fill="url(#archBox)" stroke="#258fca" stroke-width="2">
+                        <rect x="210" y="20" width="340" height="72" rx="4"/>
+                        <rect x="650" y="20" width="340" height="72" rx="4"/>
+                        <rect x="455" y="148" width="290" height="72" rx="4"/>
+                        <rect x="400" y="278" width="400" height="110" rx="4"/>
+                        <rect x="80" y="482" width="280" height="80" rx="36"/>
+                        <rect x="400" y="482" width="400" height="80" rx="4"/>
+                        <rect x="820" y="482" width="320" height="80" rx="4"/>
+                        <rect x="400" y="625" width="400" height="72" rx="4"/>
+                        <rect x="820" y="625" width="320" height="72" rx="4"/>
+                    </g>
+                    <g class="arch-text" fill="#f4f7fb" font-family="Inter, system-ui, sans-serif" text-anchor="middle">
+                        <text x="380" y="64" font-size="22">React 18 · TypeScript · PWA</text>
+                        <text x="820" y="53" font-size="21">EasyPi Mobile · Android</text>
+                        <text x="820" y="77" font-size="15" fill="#c8d3e2">QR pairing · certificate pinning</text>
+                        <text x="440" y="130" font-size="17" fill="#bfeaff">HTTPS</text>
+                        <text x="760" y="130" font-size="17" fill="#bfeaff">HTTPS · Mobile API</text>
+                        <text x="600" y="192" font-size="21">nginx · local TLS</text>
+                        <text x="600" y="321" font-size="21">FastAPI · REST</text>
+                        <text x="600" y="351" font-size="19">authenticated WebSockets</text>
+                        <text x="220" y="529" font-size="20">SQLite / PostgreSQL</text>
+                        <text x="600" y="520" font-size="20">Allowlisted privileged tasks</text>
+                        <text x="600" y="547" font-size="18" fill="#c8d3e2">root · systemd</text>
+                        <text x="980" y="520" font-size="19">WireGuard · Tailscale</text>
+                        <text x="980" y="547" font-size="18" fill="#c8d3e2">outbound VPN</text>
+                        <text x="600" y="656" font-size="19">NetProtection · PRISM · firewall</text>
+                        <text x="600" y="682" font-size="18" fill="#c8d3e2">routing</text>
+                        <text x="980" y="668" font-size="19">Personal DNS · Chameleon VPS</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="technology-cards">
+                <article class="technology-card" id="chameleon">
+                    <div>
+                        <span class="eyebrow">STEALTH TRANSPORT</span>
+                        <h3>Chameleon</h3>
+                        <p>Single-hop traffic protection that resembles ordinary HTTPS.</p>
+                        <ul>
+                            <li>nginx cover on TCP 443 with the backend kept on loopback</li>
+                            <li>XChaCha20-Poly1305, HKDF-SHA256, and anti-replay controls</li>
+                            <li>Strict DNS and a fail-closed firewall kill-switch</li>
+                        </ul>
+                    </div>
+                    <a href="assets/screenshots/stealth/stealth.png" target="_blank">
+                        <img src="assets/screenshots/stealth/stealth.png" alt="EasyPi Chameleon Stealth configuration">
+                    </a>
+                </article>
+                <article class="technology-card" id="prism">
+                    <div>
+                        <span class="eyebrow">ADAPTIVE NETWORK ANALYSIS</span>
+                        <h3>PRISM</h3>
+                        <p>Guard Security learns normal traffic and reviews new signals before enforcement.</p>
+                        <ul>
+                            <li>FlowGraph, TLS Lineage Gate, and Counterfactual Flow Lab</li>
+                            <li>Shadow Mode observes candidate decisions safely</li>
+                            <li>Heuristics combine DNS, device, timing, and traffic evidence</li>
+                        </ul>
+                    </div>
+                    <a href="assets/screenshots/guard-security/3.shadow_mode.png" target="_blank">
+                        <img src="assets/screenshots/guard-security/3.shadow_mode.png" alt="PRISM Shadow Mode">
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Security Section -->
+    <section class="security" id="security">
+        <div class="container">
+            <div class="security-content">
+                <div class="security-text">
+                    <span class="section-badge" data-i18n="sec-badge">Security First</span>
+                    <h2 class="section-title" data-i18n="sec-title">Layered, visible security</h2>
+                    <p class="section-description" data-i18n="sec-desc">
+                        Authentication, network policy, audit trails, and explicit trust boundaries work together.
+                    </p>
+
+                    <div class="security-features">
+                        <div class="security-feature">
+                            <div class="security-icon">🔐</div>
+                            <div>
+                                <h4 data-i18n="sec-2fa-title">Two-Factor Authentication</h4>
+                                <p data-i18n="sec-2fa-desc">TOTP-based 2FA for secure access</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <div class="security-icon">🛡️</div>
+                            <div>
+                                <h4>Guard Security</h4>
+                                <p>DNS policy, heuristics, Shadow Mode, and device controls</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <div class="security-icon">🔥</div>
+                            <div>
+                                <h4 data-i18n="sec-fw-title">Firewall Management</h4>
+                                <p data-i18n="sec-fw-desc">UFW/iptables configuration</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <div class="security-icon">🔑</div>
+                            <div>
+                                <h4>SSL/TLS Certificates</h4>
+                                <p>Encrypted communications</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <div class="security-icon">🗝️</div>
+                            <div>
+                                <h4>AES-256-GCM Encryption</h4>
+                                <p>Authenticated client-side encryption for PiCloud files</p>
+                            </div>
+                        </div>
+                        <div class="security-feature">
+                            <div class="security-icon">🚦</div>
+                            <div>
+                                <h4>Rate Limiting</h4>
+                                <p>API protection against abuse</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-visual">
+                    <div class="parental-control-image">
+                        <img src="assets/screenshots/guard-security/1.guard.png" alt="EasyPi Guard Security"
+                            class="security-screenshot">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parental Control Section -->
+    <section class="parental-section" id="parental">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge" data-i18n="parental-badge">Parental Control</span>
+                <h2 class="section-title" data-i18n="parental-title">Bypass Detection + Immediate Response</h2>
+                <p class="section-description" data-i18n="parental-desc">
+                    EasyPi can detect encrypted DNS and proxy/VPN bypass attempts, log them, and apply device
+                    quarantine when needed.
+                </p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🛡️</div>
+                    <h4>VPN/Proxy Bypass</h4>
+                    <p>Blocks common VPN, proxy and encrypted DNS bypass channels.</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🌐</div>
+                    <h4>DNS-over-HTTPS Control</h4>
+                    <p>Prevents DoH/DoT bypass so profile DNS policies continue to work.</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🔒</div>
+                    <h4>Fail-Closed Quarantine</h4>
+                    <p>Optional emergency mode: cut internet for a specific device until manual restore.</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">📋</div>
+                    <h4>Leak & Bypass Logs</h4>
+                    <p>Each event records profile, IP, method and timestamp for quick incident response.</p>
+                </div>
+            </div>
+
+            <div class="network-visual animate-fade-in-up delay-1">
+                <img src="assets/screenshots/guard-security/6.parents_control_2.png"
+                    alt="EasyPi Parental Controls and Bypass Protection" class="full-width-screenshot">
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant Section -->
+    <section class="ai-assistant" id="ai">
+        <div class="container">
+            <div class="ai-content">
+                <div class="ai-visual">
+                    <div class="ai-preview-image">
+                        <img src="assets/screenshots/ai-chat/1.ai_chat.png" alt="EasyPi AI Assistant"
+                            class="ai-screenshot">
+                    </div>
+                </div>
+
+                <div class="ai-text">
+                    <span class="section-badge" data-i18n="ai-badge">Local AI</span>
+                    <h2 class="section-title" data-i18n="ai-title">EasyPi-aware Ollama chat</h2>
+                    <p class="section-description" data-i18n="ai-desc">
+                        Local models receive a bounded set of relevant passages from the packaged EasyPi documentation,
+                        without indexing databases, logs, keys, runtime secrets, or personal files.
+                    </p>
+
+                    <div class="ai-capabilities">
+                        <div class="capability">
+                            <div class="capability-icon">🔧</div>
+                            <div>
+                                <h4 data-i18n="cap-setup">EasyPi documentation context</h4>
+                                <p>Answers questions about modules, setup, and product behavior.</p>
+                            </div>
+                        </div>
+                        <div class="capability">
+                            <div class="capability-icon">🔍</div>
+                            <div>
+                                <h4 data-i18n="cap-diag">Private local inference</h4>
+                                <p>Runs through Ollama on your own hardware.</p>
+                            </div>
+                        </div>
+                        <div class="capability">
+                            <div class="capability-icon">💬</div>
+                            <div>
+                                <h4 data-i18n="cap-chat">Separate diagnostic agent</h4>
+                                <p>Live system facts and sensitive actions use bounded probes and explicit authorization.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Tools Section -->
+    <section class="network-tools" id="network">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge" data-i18n="net-badge">Network Tools</span>
+                <h2 class="section-title" data-i18n="net-title">Professional Network Management</h2>
+                <p class="section-description" data-i18n="net-desc">
+                    Complete toolkit for network diagnostics, monitoring, and security
+                </p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">🔍</div>
+                    <h4 data-i18n="tool-ps">Port Scanner</h4>
+                    <p data-i18n="tool-ps-desc">Scan ports with service detection</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">📡</div>
+                    <h4 data-i18n="tool-ld">LAN Discovery</h4>
+                    <p data-i18n="tool-ld-desc">Find local network devices</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">⚡</div>
+                    <h4 data-i18n="tool-st">Speed Test</h4>
+                    <p data-i18n="tool-st-desc">Test connection speed</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🗺️</div>
+                    <h4 data-i18n="tool-nm">Network Map</h4>
+                    <p data-i18n="tool-nm-desc">Visualize topology</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">📈</div>
+                    <h4 data-i18n="tool-tm">Traffic Monitor</h4>
+                    <p data-i18n="tool-tm-desc">Bandwidth monitoring</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">📹</div>
+                    <h4 data-i18n="tool-rc">RTSP Cameras</h4>
+                    <p data-i18n="tool-rc-desc">Manage security cameras</p>
+                </div>
+            </div>
+
+            <div class="network-visual animate-fade-in-up delay-1">
+                <img src="assets/screenshots/network-activity/1.network_activity.png" alt="Network Activity Monitoring"
+                    class="full-width-screenshot">
+            </div>
+        </div>
+    </section>
+
+    <!-- Module Map Section -->
+    <section class="tech-stack" id="modules">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge" data-i18n="modules-badge">Module Map</span>
+                <h2 class="section-title" data-i18n="modules-title">EasyPi Product Modules</h2>
+                <p class="section-description" data-i18n="modules-desc">
+                    The website now mirrors the real EasyPi interface layout and core modules.
+                </p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-column">
+                    <h3 data-i18n="modules-group-core">Core Control</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <span class="tech-logo">📊</span>
+                            <span>Dashboard</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">⚙️</span>
+                            <span>Setup</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">👥</span>
+                            <span>Users</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">📁</span>
+                            <span>Files</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">💻</span>
+                            <span>Terminal</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🧭</span>
+                            <span>Help & Support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-column">
+                    <h3 data-i18n="modules-group-security">Security & Family</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <span class="tech-logo">🛡️</span>
+                            <span>Guard Security</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🔒</span>
+                            <span>Parental Controls</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🌐</span>
+                            <span>DNS Filtering</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🚫</span>
+                            <span>Bypass Detection</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">📋</span>
+                            <span>Leak Logs</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">⛔</span>
+                            <span>Fail-Closed Restore</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-column">
+                    <h3 data-i18n="modules-group-network">Network & Access</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <span class="tech-logo">🔐</span>
+                            <span>VPN</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🌍</span>
+                            <span>Remote Access</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🧰</span>
+                            <span>Network Toolkit</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">📈</span>
+                            <span>Network Activity</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">📡</span>
+                            <span>Monitoring</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">📹</span>
+                            <span>IP Cameras</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">📱</span>
+                            <span>EasyPi Mobile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-column">
+                    <h3 data-i18n="modules-group-automation">Automation</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <span class="tech-logo">🤖</span>
+                            <span>AI Assistant</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">💾</span>
+                            <span>System Backup</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🧩</span>
+                            <span>Cloud Integrations</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🔔</span>
+                            <span>Alerting</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🧪</span>
+                            <span>Health Checks</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-logo">🗂️</span>
+                            <span>Logs & Reports</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="architecture-diagram">
+                <pre class="code-block">
+Browser / PWA → nginx TLS → FastAPI control plane → allowlisted privileged runner
+                      ↓                 ↓                         ↓
+                 Static UI       SQLite + policy        systemd / firewall / routes
+                                        ↓
+      Unbound DNS · PRISM · WireGuard · Tailscale · Chameleon · go2rtc · FFmpeg</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshot Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge" data-i18n="gallery-badge">Screenshots</span>
+                <h2 class="section-title" data-i18n="gallery-title">Structured Gallery by Module</h2>
+                <p class="section-description" data-i18n="gallery-desc">
+                    Real screens from EasyPi, grouped by section so users can quickly understand what each module does.
+                </p>
+            </div>
+
+            <div class="gallery-groups">
+                <article class="gallery-group">
+                    <h3 data-i18n="gallery-group-dashboard">Dashboard</h3>
+                    <div class="gallery-grid">
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/dashboard/dashboard-1.png" alt="EasyPi Dashboard overview"
+                                    loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>Main dashboard</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/dashboard/dashboard-2.png" alt="EasyPi Dashboard widgets"
+                                    loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>Live system widgets</figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="gallery-group">
+                    <h3 data-i18n="gallery-group-guard">Guard Security & Parental</h3>
+                    <div class="gallery-grid">
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/guard-security/1.guard.png" alt="EasyPi Guard Security"
+                                    loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>Security center</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/guard-security/5.parents_control.png"
+                                    alt="EasyPi Parental Controls" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>Parental controls</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/guard-security/14.dns_setings.png"
+                                    alt="EasyPi DNS settings" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>DNS protection settings</figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="gallery-group">
+                    <h3 data-i18n="gallery-group-network">Network Toolkit & Activity</h3>
+                    <div class="gallery-grid">
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/network-toolkit/1.toolkit.png" alt="EasyPi Network Toolkit"
+                                    loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>Toolkit home</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/network-toolkit/3.port_scanner.png"
+                                    alt="EasyPi port scanner module" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>Port scanner</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/network-activity/1.network_activity.png"
+                                    alt="EasyPi network activity chart" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>Traffic activity</figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="gallery-group">
+                    <h3 data-i18n="gallery-group-ai">AI, Backup & Support</h3>
+                    <div class="gallery-grid">
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner"><img src="assets/screenshots/ai-chat/1.ai_chat.png" alt="EasyPi AI chat" loading="lazy"><div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+                            <figcaption>AI assistant chat</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner"><img src="assets/screenshots/system-backup/sistem_backup.png" alt="EasyPi backup module"
+                                loading="lazy"></div>
+                            <figcaption>Backup and restore</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <img src="assets/screenshots/help-support/1.help_support.png"
+                                alt="EasyPi Help and Support module" loading="lazy">
+                            <figcaption>Help & Support</figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="gallery-group">
+                    <h3 data-i18n="gallery-group-vpn">VPN, Access & Operations</h3>
+                    <div class="gallery-grid">
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/vpn/vpn.png" alt="EasyPi VPN management" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>VPN management</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/remote-access/remote_1.png" alt="EasyPi remote access"
+                                    loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>Remote access</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/easyPi-mobile/1.png" alt="EasyPi Mobile pairing and remote link"
+                                    loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>EasyPi Mobile</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/terminal/terminal.png" alt="EasyPi web terminal"
+                                    loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                                    </svg></div>
+                            </div>
+                            <figcaption>Web terminal</figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="gallery-group">
+                    <h3>Privacy, DNS & Cloud</h3>
+                    <div class="gallery-grid">
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/dns/dns-1.png" alt="EasyPi Personal DNS" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Personal DNS</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/internet-encryption/internet-encryption.png" alt="EasyPi Internet Encryption" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Internet encryption</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/stealth/stealth.png" alt="EasyPi Stealth" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Stealth</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/cloud/cloud.png" alt="EasyPi Cloud" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Private cloud</figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="gallery-group">
+                    <h3>Operations, Recovery & Marketplace</h3>
+                    <div class="gallery-grid">
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/jobs/jobs.png" alt="EasyPi Jobs" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Jobs</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/notifications/notifications.png" alt="EasyPi Notifications" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Notifications</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/rollback/rollback.png" alt="EasyPi Rollback" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Rollback</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/marketplace/marketplace.png" alt="EasyPi Marketplace" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Marketplace preview</figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="gallery-group">
+                    <h3>Security Cameras</h3>
+                    <div class="gallery-grid">
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/ip-cameras/1.cameras.png" alt="EasyPi camera overview" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Camera overview</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/ip-cameras/2.cameras_live.png" alt="EasyPi camera recording controls" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Recording controls</figcaption>
+                        </figure>
+                        <figure class="gallery-item">
+                            <div class="gallery-item-inner">
+                                <img src="assets/screenshots/ip-cameras/3.cameras_record.png" alt="EasyPi camera recordings" loading="lazy">
+                                <div class="gallery-item-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg></div>
+                            </div>
+                            <figcaption>Saved recordings</figcaption>
+                        </figure>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="installation" id="installation">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge" data-i18n="nav-install">Get Started</span>
+                <h2 class="section-title" data-i18n="install-title">Install a verified release</h2>
+                <p class="section-description" data-i18n="install-subtitle">
+                    Official target: Raspberry Pi OS Lite 64-bit, Debian Trixie, ARM64. Verify the publisher signature before privileged installation.
+                </p>
+            </div>
+
+            <div class="install-content">
+                <div class="requirements">
+                    <h3>📋 Requirements</h3>
+                    <ul>
+                        <li>
+                            <span class="req-icon">🍓</span>
+                            <span>ARM64 Raspberry Pi (Pi 4 with 4GB RAM or better recommended)</span>
+                        </li>
+                        <li>
+                            <span class="req-icon">💿</span>
+                            <span>Raspberry Pi OS Lite 64-bit based on Debian Trixie</span>
+                        </li>
+                        <li>
+                            <span class="req-icon">💾</span>
+                            <span>32GB+ storage with additional space for models, backups, and recordings</span>
+                        </li>
+                        <li>
+                            <span class="req-icon">🌐</span>
+                            <span>Internet connection</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="install-steps">
+                    <h3>🚀 Installation</h3>
+                    <p class="section-description">
+                        EasyPi uses a detached RSA/SHA-256 signature. The trust key must come from an independently authenticated channel.
+                    </p>
+
+                    <div class="terminal-container">
+                        <div class="terminal active" id="binary-terminal">
+                            <div class="terminal-header">
+                                <div class="terminal-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <span class="terminal-title">Terminal — Signed Release Installation</span>
+                            </div>
+                            <div class="terminal-body">
+                                <div class="terminal-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">easypi-install-release \
+                                        --archive-url "https://release.example/easypi-full-aarch64-trixie.tar.gz" \
+                                        --signature-url "https://release.example/easypi-full-aarch64-trixie.tar.gz.sig"</span>
+                                    <button class="copy-btn"
+                                        data-copy='easypi-install-release --archive-url "https://release.example/easypi-full-aarch64-trixie.tar.gz" --signature-url "https://release.example/easypi-full-aarch64-trixie.tar.gz.sig"'>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="terminal-line output">
+                                    <span class="success">✓</span>
+                                    <span>Signature verified → archive validated → transactional install</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="default-credentials">
+                            <div class="credentials">
+                                <div class="credential">
+                                    <span class="label" data-i18n="setup-title">Setup:</span>
+                                    <span data-i18n="setup-warning">Follow the on-screen wizard to create your admin
+                                        account.</span>
+                                </div>
+                            </div>
+                            <p class="warning">
+                                A checksum detects corruption; it does not authenticate the publisher. The detached
+                                signature is the release trust gate.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">FAQ</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-description">Got questions? We've got answers.</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        What hardware does EasyPi support?
+                        <i class="faq-icon">+</i>
+                    </button>
+                    <div class="faq-answer">
+                        The official binary target is ARM64 on Raspberry Pi OS Lite based on Debian Trixie. A Pi 4 with
+                        at least 4 GB RAM or better is recommended. Storage needs grow with AI models, backups, Cloud
+                        files, and camera recordings.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Do I need any Linux or networking knowledge to set it up?
+                        <i class="faq-icon">+</i>
+                    </button>
+                    <div class="faq-answer">
+                        The guided setup wizard handles the normal workflow—from creating an administrator account to
+                        enabling VPN and parental controls. A signed release installer performs the initial system
+                        installation; gateway, DNS, camera, and VPS deployments still benefit from basic networking
+                        knowledge.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Is my data sent to the cloud?
+                        <i class="faq-icon">+</i>
+                    </button>
+                    <div class="faq-answer">
+                        Core state remains on your Pi. Local AI runs through Ollama and only receives bounded packaged
+                        documentation context. Features you explicitly configure—such as Tailscale, Telegram, email,
+                        a VPN provider, Personal DNS, or a Chameleon VPS—communicate with those external services.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        How does parental control bypass detection work?
+                        <i class="faq-icon">+</i>
+                    </button>
+                    <div class="faq-answer">
+                        EasyPi monitors for traffic patterns typical of VPN clients, proxy tools, and DNS-over-HTTPS
+                        resolvers. When a bypass attempt is detected for a restricted profile, it logs the event with
+                        the device IP, method, and timestamp — and can optionally quarantine the device until manually
+                        restored.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        Can I update EasyPi without losing my configuration?
+                        <i class="faq-icon">+</i>
+                    </button>
+                    <div class="faq-answer">
+                        Yes. The built-in backup module lets you export your full configuration before any update.
+                        Restoring takes a single click. EasyPi also creates automatic snapshots before applying system
+                        changes.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" aria-expanded="false">
+                        What license does EasyPi use?
+                        <i class="faq-icon">+</i>
+                    </button>
+                    <div class="faq-answer">
+                        EasyPi is distributed under a Proprietary License. You may use it on your own hardware for
+                        personal or household use. Commercial use, redistribution, and modification require explicit
+                        permission. See the <a href="LICENSE.txt"
+                            style="color: var(--accent); text-decoration: underline;">full license</a> and <a
+                            href="EULA.txt" style="color: var(--accent); text-decoration: underline;">EULA</a> for
+                        details.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your <span class="gradient-text">Raspberry Pi</span>?</h2>
+                <p>Install the latest binary release and bring your Raspberry Pi network under control in minutes.</p>
+                <div class="cta-actions">
+                    <a href="https://github.com/NextQuantum/EasyPi/releases/latest" target="_blank"
+                        class="btn btn-primary btn-lg">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path
+                                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                        Download Release
+                    </a>
+                    <a href="https://github.com/NextQuantum/EasyPi" target="_blank" class="btn btn-glass btn-lg">View
+                        Repository</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="assets/favicon.svg" class="logo-mark" alt="EasyPi Logo">
+                        <span class="logo-text">EasyPi</span>
+                    </a>
+                    <p>Raspberry Pi security and network control dashboard.</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/NextQuantum/EasyPi" target="_blank" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4 data-i18n="footer-product">Product</h4>
+                        <ul>
+                            <li><a href="#features" data-i18n="nav-features">Features</a></li>
+                            <li><a href="#security" data-i18n="nav-security">Security</a></li>
+                            <li><a href="#parental" data-i18n="nav-parental">Parental</a></li>
+                            <li><a href="#mobile" data-i18n="nav-mobile">Mobile</a></li>
+                            <li><a href="#modules" data-i18n="nav-modules">Modules</a></li>
+                            <li><a href="#gallery" data-i18n="nav-gallery">Gallery</a></li>
+                            <li><a href="#installation" data-i18n="nav-install">Installation</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 data-i18n="footer-resources">Resources</h4>
+                        <ul>
+                            <li><a href="https://github.com/NextQuantum/EasyPi/releases/latest" target="_blank"
+                                    data-i18n="footer-release-latest">Latest Release</a></li>
+                            <li><a href="https://github.com/NextQuantum/EasyPi/releases" target="_blank"
+                                    data-i18n="footer-release-all">All Releases</a></li>
+                            <li><a href="https://github.com/NextQuantum/EasyPi/issues" target="_blank"
+                                    data-i18n="footer-issues">Issues</a></li>
+                            <li><a href="https://github.com/NextQuantum/EasyPi/discussions" target="_blank"
+                                    data-i18n="footer-discussions">Discussions</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 data-i18n="legal-title">Legal</h4>
+                        <ul>
+                            <li><a href="LICENSE.txt">License</a></li>
+                            <li><a href="EULA.txt">EULA</a></li>
+                            <li><a href="#" data-i18n="stat-license-label">Proprietary License</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-i18n="footer-copyright">© 2026 EasyPi. Distributed under a Proprietary License.</p>
+                <p data-i18n="footer-made-with">Made with ❤️ for the Raspberry Pi community</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+
+</html>
